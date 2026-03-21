@@ -6,6 +6,7 @@ from sklearn.pipeline import Pipeline
 
 from src.exception import MyException
 from src.logger import logging
+# from src.entity.s3_estimator import Proj1Estimator
 
 class TargetValueMapping:
     def __init__(self):
@@ -32,6 +33,9 @@ class MyModel:
         applies scaling using preprocessing_object, and performs prediction on transformed features.
         """
         try:
+            if "id" not in dataframe.columns:
+                dataframe = dataframe.copy()
+                dataframe["id"] = 0
             logging.info("Starting prediction process.")
 
             # Step 1: Apply scaling transformations using the pre-trained preprocessing object
